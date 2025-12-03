@@ -1,0 +1,500 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package mx.unison.pagina;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class PaginaInicio extends javax.swing.JFrame {
+
+    private InicioSesion panelLogin;
+    private String rolesUsuario;
+
+    /**
+     * Creates new form Productos
+     */
+    public PaginaInicio() {
+        initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        initUI();       
+        setupEventos();  
+        mostrarLogin();  
+    }
+
+    private void mostrarLogin() {
+        InicioSesion login = new InicioSesion(this);
+        panelContenedor.removeAll();
+        panelContenedor.add(login, BorderLayout.CENTER);
+        panelContenedor.revalidate();
+        panelContenedor.repaint();
+    }
+
+    public void activarSesion(String rol) {
+        this.rolesUsuario = rol;
+        aplicarRol();  
+        panelInicio.setVisible(true);
+        menuBar.setVisible(true);
+        cambiarPanel(panelInicio);  
+
+        System.out.println("Sesion activada, rol: " + rol);
+    }
+
+    private void initUI() {
+        centrarContenido();
+        panelInicio.setVisible(false);
+        panelLogin = new InicioSesion(this);
+
+        this.setJMenuBar(menuBar);
+        menuBar.setVisible(false);
+
+        panelContenedor = new JPanel(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(panelContenedor, BorderLayout.CENTER);
+        panelContenedor.add(panelLogin, BorderLayout.CENTER);
+
+        setLocationRelativeTo(null);
+    }
+
+    private void setupEventos() {
+        menuItemPagina.addActionListener(e -> cambiarPanel(panelInicio));
+        menuItemProductos.addActionListener(e -> cambiarPanel(new Productos(rolesUsuario, this)));
+        menuItemAlmacenes.addActionListener(e -> cambiarPanel(new Almacenes(rolesUsuario, this)));
+    }
+
+    private void centrarContenido() {
+        panelInicio.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        // Panel superior
+        gbc.gridy = 0;
+        Panel2.setPreferredSize(new Dimension(800, 100));
+        panelInicio.add(Panel2, gbc);
+
+        // Panel central
+        JPanel centro = new JPanel(new GridBagLayout());
+        centro.setBackground(Color.WHITE);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.anchor = GridBagConstraints.CENTER;
+
+        c.gridy = 0;
+        c.insets = new Insets(20, 0, 10, 0);
+        centro.add(jLabel2, c);
+
+        c.gridy = 1;
+        c.insets = new Insets(10, 0, 20, 0);
+        centro.add(jLabel1, c);
+
+        gbc.gridy = 1;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        panelInicio.add(centro, gbc);
+
+        Panel1.setLayout(new BorderLayout());
+        Panel3.setPreferredSize(new Dimension(Integer.MAX_VALUE, 51));
+        Panel3.setBackground(new Color(248, 187, 0));
+        Panel1.add(Panel3, BorderLayout.NORTH);
+
+        JPanel banner = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        banner.setBackground(new Color(0, 82, 158));
+        banner.add(jTextField8);
+        Panel1.add(banner, BorderLayout.CENTER);
+
+        gbc.gridy = 2;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        Panel1.setPreferredSize(new Dimension(800, 190));
+        panelInicio.add(Panel1, gbc);
+    }
+
+    public String getRol() {
+        return rolesUsuario;
+    }
+
+    private void aplicarRol() {
+        menuItemPagina.setVisible(true);
+        menuItemAlmacenes.setVisible(true);
+        menuItemProductos.setVisible(true);
+        menu.setText("Opciones");
+    }
+
+    public void cargarPublico(JPanel panel) {
+        panelContenedor.removeAll();
+        panelContenedor.setLayout(new BorderLayout());
+        panelContenedor.add(panel, BorderLayout.CENTER);
+        panelContenedor.revalidate();
+        panelContenedor.repaint();
+    }
+
+    private void cambiarPanel(JPanel panel) {
+        panelContenedor.removeAll();
+        panelContenedor.setLayout(new BorderLayout());
+        panelContenedor.add(panel, BorderLayout.CENTER);
+        panelContenedor.revalidate();
+        panelContenedor.repaint();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        panelInicio = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Panel1 = new javax.swing.JPanel();
+        Panel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        Panel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        panelContenedor = new javax.swing.JPanel();
+        menuBar = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenu();
+        menuItemPagina = new javax.swing.JMenuItem();
+        menuItemAlmacenes = new javax.swing.JMenuItem();
+        menuItemProductos = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(880, 750));
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
+
+        panelInicio.setBackground(new java.awt.Color(255, 255, 255));
+        panelInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen4.jpeg.png"))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Alumno: Abraham Moreno Lopez      Pagina UNISON Proyecto");
+
+        Panel1.setBackground(new java.awt.Color(0, 82, 158));
+
+        Panel3.setBackground(new java.awt.Color(248, 187, 0));
+
+        javax.swing.GroupLayout Panel3Layout = new javax.swing.GroupLayout(Panel3);
+        Panel3.setLayout(Panel3Layout);
+        Panel3Layout.setHorizontalGroup(
+            Panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        Panel3Layout.setVerticalGroup(
+            Panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 42, Short.MAX_VALUE)
+        );
+
+        jTextField8.setEditable(false);
+        jTextField8.setBackground(new java.awt.Color(0, 82, 158));
+        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setText("Blvd. Luis Encinas J, Calle Av. Rosales &, Centro, 83000 Hermosillo, Son.");
+        jTextField8.setBorder(null);
+        jTextField8.setFocusable(false);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ubicacionesv.png"))); // NOI18N
+
+        javax.swing.GroupLayout Panel1Layout = new javax.swing.GroupLayout(Panel1);
+        Panel1.setLayout(Panel1Layout);
+        Panel1Layout.setHorizontalGroup(
+            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Panel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(Panel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(164, 164, 164)
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Panel1Layout.setVerticalGroup(
+            Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel1Layout.createSequentialGroup()
+                .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Panel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel1Layout.createSequentialGroup()
+                        .addComponent(Panel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel1Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel3))
+                            .addGroup(Panel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(11, 11, 11))
+        );
+
+        Panel2.setBackground(new java.awt.Color(0, 82, 158));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ALOGO-OJO-BUHO-AMARILLO v3.png"))); // NOI18N
+
+        jTextField7.setEditable(false);
+        jTextField7.setBackground(new java.awt.Color(0, 82, 158));
+        jTextField7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField7.setText("comunicacion@unison.mx");
+        jTextField7.setBorder(null);
+        jTextField7.setFocusable(false);
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/correo v2.png"))); // NOI18N
+
+        javax.swing.GroupLayout Panel2Layout = new javax.swing.GroupLayout(Panel2);
+        Panel2.setLayout(Panel2Layout);
+        Panel2Layout.setHorizontalGroup(
+            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        Panel2Layout.setVerticalGroup(
+            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel2Layout.createSequentialGroup()
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7))
+                    .addGroup(Panel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        panelContenedor.setBackground(new java.awt.Color(255, 255, 255));
+        panelContenedor.setToolTipText("");
+        panelContenedor.setName("panelContenedor"); // NOI18N
+        panelContenedor.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
+        panelInicio.setLayout(panelInicioLayout);
+        panelInicioLayout.setHorizontalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
+                .addContainerGap(142, Short.MAX_VALUE)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
+                        .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(237, 237, 237))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(242, 242, 242))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152))))
+        );
+        panelInicioLayout.setVerticalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioLayout.createSequentialGroup()
+                .addComponent(Panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        menuBar.setBackground(new java.awt.Color(248, 187, 0));
+        menuBar.setForeground(new java.awt.Color(204, 204, 204));
+
+        menu.setBackground(new java.awt.Color(248, 187, 0));
+        menu.setText("Opciones");
+        menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuActionPerformed(evt);
+            }
+        });
+
+        menuItemPagina.setText("Pagina Principal");
+        menu.add(menuItemPagina);
+
+        menuItemAlmacenes.setText("Almacenes");
+        menu.add(menuItemAlmacenes);
+
+        menuItemProductos.setText("Productos");
+        menu.add(menuItemProductos);
+
+        menuBar.add(menu);
+
+        setJMenuBar(menuBar);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        DatabaseManager.inicializar();
+        System.out.println("️ Base de datos lista: " + DatabaseManager.getDBPath());
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PaginaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PaginaInicio().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Panel1;
+    private javax.swing.JPanel Panel2;
+    private javax.swing.JPanel Panel3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JMenu menu;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuItemAlmacenes;
+    private javax.swing.JMenuItem menuItemPagina;
+    private javax.swing.JMenuItem menuItemProductos;
+    private javax.swing.JPanel panelContenedor;
+    private javax.swing.JPanel panelInicio;
+    // End of variables declaration//GEN-END:variables
+}
